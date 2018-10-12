@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.example.shangyulin.modularizationtest"
+        minSdkVersion 15
+        targetSdkVersion 26
+        flavorDimensions "1"
+        versionCode 1
+        versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+//    productFlavors{
+//        base {}
+//        login {}
+//        pay {}
+//    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.2.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compile 'com.yanzhenjie:permission:1.0.6'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
+    api project(':Pay')
+    api project(':Login')
+//    baseCompile project(':Base')
+//    loginCompile project(':Login')
+//    payCompile project(':Pay')
+}
